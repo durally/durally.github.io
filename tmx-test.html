@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <script type="text/javascript">
+      function generateSessionID() {
+        return Math.random().toString(36).substring(2) + "" + Date.now();
+      }
+      var head, script, sessionID;
+      function profile()
+      {
+        head = document.getElementsByTagName("head").item(0);
+        script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        sessionID = generateSessionID();
+        script.setAttribute("src", "https://h.online-metrix.net/tags.js?org_id=saawfby5&session_id="+sessionID+"&page_id=1&allow_reprofile=1");
+        head.appendChild(script);
+      }
+      profile();
+    </script>
+  </head>
+  <body>
+    <button id="button-profile" onclick="profile();">Profile</button>
+  </body>
+</html>
+
