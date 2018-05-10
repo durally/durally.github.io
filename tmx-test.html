@@ -6,15 +6,23 @@
       }
 
       var head, script, sessionID;
+      var profiling_start_timestamp;
 
       function profile()
       {
+        profiling_start_timestamp = new Date();
         head = document.getElementsByTagName("head").item(0);
         script = document.createElement("script");
         script.setAttribute("type", "text/javascript");
         sessionID = generateSessionID();
         script.setAttribute("src", "https://h.online-metrix.net/tags.js?org_id=cldhwr3z&session_id="+sessionID+"&page_id=1");
         head.appendChild(script);
+        setTimeout(mock_profiling_complete, Math.floor(Math.random() * 10000));
+      }
+
+      function mock_profiling_complete() {
+        profiling_duration = new Date() - profiling_start_timestamp;
+        console.log("mock profiling complete in " + profiling_duration + " ms");
       }
 
       function tmx_profiling_complete(session_id)
