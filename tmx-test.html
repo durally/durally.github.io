@@ -4,17 +4,43 @@
       function generateSessionID() {
         return Math.random().toString(36).substring(2) + "" + Date.now();
       }
+
       var head, script, sessionID;
+
       function profile()
       {
         head = document.getElementsByTagName("head").item(0);
         script = document.createElement("script");
         script.setAttribute("type", "text/javascript");
         sessionID = generateSessionID();
-        script.setAttribute("src", "https://h.online-metrix.net/tags.js?org_id=saawfby5&session_id="+sessionID+"&page_id=1&allow_reprofile=1");
+        script.setAttribute("src", "https://h.online-metrix.net/tags.js?org_id=cldhwr3z&session_id="+sessionID+"&page_id=1");
         head.appendChild(script);
       }
+
+      function tmx_profiling_complete(session_id)
+      {
+        console.log("tmx_profiling_complete called with session_id " + session_id);
+        alert('tmx profiling complete');
+      }
+
+      function profiling_complete(event)
+      {
+        //event.data will be in format "tmx_profiling_complete:<session_id>"
+        console.log("profiling_complete called with session_id "+event.data.split(':')[1]);
+        alert('profiling complete');
+      }
+
+      if (window.addEventListener)
+      {
+        window.addEventListener("message", profiling_complete, false);
+      }
+      else
+      {
+        window.attachEvent('onmessage', profiling_complete);
+      }
+
       profile();
+
     </script>
   </head>
   <body>
